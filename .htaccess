@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  
+  # Non reindirizzare se la richiesta è per un file reale (es. immagini, CSS, JS)
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Reindirizza tutte le altre rotte al file index.html di React
+  RewriteRule ^ index.html [L]
+</IfModule>
