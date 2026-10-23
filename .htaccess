@@ -1,7 +1,12 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
-  
+
+  # Blocca l'accesso diretto a file e cartelle nascosti (es. .git, .env):
+  # da solo non basta se quei file sono già pubblicati sul server, ma
+  # evita che tornino accessibili in futuro.
+  RewriteRule (^|/)\. - [F]
+
   # Non reindirizzare se la richiesta è per un file reale (es. immagini, CSS, JS)
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
